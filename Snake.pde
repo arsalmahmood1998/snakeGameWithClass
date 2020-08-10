@@ -66,7 +66,7 @@ class Snake {
     PVector lastpoint=points.get(points.size()-1);
     PVector secondLastpoint=points.get(points.size()-2);
     PVector tailDirection= PVector.sub(lastpoint, secondLastpoint);
-    for (int i=0; i<10; i++) {
+    for (int i=0; i<50; i++) {
       lastpoint=points.get(points.size()-1);
       PVector newPoint = PVector.add(lastpoint, tailDirection);
       points.add(newPoint);
