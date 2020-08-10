@@ -14,15 +14,15 @@ void keyPressed() {
   }
   else{
     snake.initialize();
-    score.score=0;
+    score._score=0;
   }
 }
 void updateGame() {
-    float dist=dist(snake.points.get(0).x, snake.points.get(0).y, food.food.x, food.food.y);
+    float dist=dist(snake.points.get(0).x, snake.points.get(0).y, food.foodLocation.x, food.foodLocation.y);
     if (dist<=food.radius/2) {
-      food.food.x=random(food.radius/2, width-food.radius/2);
-      food.food.y=random(food.radius/2, height-food.radius/2);
+      food.foodLocation.x=random(food.radius/2, width-food.radius/2);
+      food.foodLocation.y=random(food.radius/2, height-food.radius/2);
       snake.incrementLength();
-      score.score+=2;
+      score._score+=2;
     }
   }
