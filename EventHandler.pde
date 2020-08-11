@@ -22,7 +22,8 @@ void updateGame() {
     if (dist<=food.radius/2) {
       food.foodLocation.x=random(food.radius/2, width-food.radius/2);
       food.foodLocation.y=random(food.radius/2, height-food.radius/2);
-      snake.incrementLength();
       score+=2;
+      snake.incrementLength(score*2.5);
+      
     }
   }

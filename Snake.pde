@@ -62,11 +62,12 @@ class Snake {
       }
     }
   }
-  void incrementLength() {
+  void incrementLength(float increasedLength) {
     PVector lastpoint=points.get(points.size()-1);
     PVector secondLastpoint=points.get(points.size()-2);
+    float finalLength=constrain(increasedLength,0,70);
     PVector tailDirection= PVector.sub(lastpoint, secondLastpoint);
-    for (int i=0; i<50; i++) {
+    for (int i=0; i<finalLength; i++) {
       lastpoint=points.get(points.size()-1);
       PVector newPoint = PVector.add(lastpoint, tailDirection);
       points.add(newPoint);
