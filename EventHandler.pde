@@ -14,7 +14,7 @@ void keyPressed() {
   }
   else{
     snake.initialize();
-    score._score=0;
+    score=0;
   }
 }
 void updateGame() {
@@ -23,6 +23,6 @@ void updateGame() {
       food.foodLocation.x=random(food.radius/2, width-food.radius/2);
       food.foodLocation.y=random(food.radius/2, height-food.radius/2);
       snake.incrementLength();
-      score._score+=2;
+      score+=2;
     }
   }
