@@ -52,11 +52,11 @@ class Snake {
   }
   void updateDirection(PVector newDirection) {
     if (newDirection.x != direction.x ||newDirection.y != direction.y ) {
-      if (points.get(0).x + newDirection.x != points.get(1).x);
+      if (points.get(0).x + newDirection.x != points.get(1).x)
       {
         direction.x=newDirection.x;
       }
-      if (points.get(0).y + newDirection.y != points.get(1).y);
+      if (points.get(0).y + newDirection.y != points.get(1).y)
       {
         direction.y=newDirection.y;
       }
