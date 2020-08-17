@@ -1,24 +1,14 @@
-Snake snake;
-Food food;
-int score=0;
+Manager gameManager;
 void setup() {
   size(500, 500);
-  snake=new Snake(width/2, height/2, 100);
-  food=new Food();
+  gameManager=new Manager();
 }
 void draw() {
-  background(255);
-  snake.display();
-  snake.move();
-  food.drawFood();
-  drawScore();
-  updateGame();
-  
-}
- void  drawScore() {
-    pushStyle();
-    fill(255,100, 51);
-    textSize(30);
-    text("Score="+" "+score, 50, 50);
-    popStyle();
+  background(0, 255, 255);
+  gameManager.displayGame();
+  gameManager.moveGame();
+  boolean gameOver=gameManager.hitTest();
+  if (gameOver) {
+    gameOver();
   }
+}
