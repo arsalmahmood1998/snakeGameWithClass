@@ -2,14 +2,11 @@ class Manager {
   Snake snake;
   ArrayList <Food> foods;
   int score=0;
-  int foodsCount=20;
+  int foodsCount;
   Manager() {
     snake=new Snake(width/2, height/2, 100);
     foods=new ArrayList <Food>();
-    for (int i=0; i<foodsCount; i++) {
-      Food newfood=new Food();
-      foods.add(newfood);
-    }
+    reset();
   }
   void displayGame() {
     snake.display();
@@ -27,6 +24,37 @@ class Manager {
   void reset() {
     snake.initialize();
     score=0;
+    foods.clear();
+    addFood();
+  }
+  void addFood() {
+    // for (int i=0; i<foodsCount; i++) {
+    //  Food newfood=new Food();
+    //  foods.add(newfood);
+    //} 
+    foodsCount=(int)random(1, 10);
+    println(foodsCount);
+    foods.add(new Food());
+    for (int i=0; i<foodsCount-1; i++) {
+      println("size"+foods.size());
+      println("i="+i);
+      Food newFood=new Food();
+      boolean result=false;
+      for (int j=0; j<foods.size(); j++) {
+        println("j="+j);
+        Food existingFood=new Food();
+        if (dist(newFood.location.x, newFood.location.y, existingFood.location.x, existingFood.location.y)>newFood.radius) {
+          result=true;
+        }
+        else{
+          result=false;
+        }
+      }
+      if (result==true) {
+        foods.add(newFood);
+        println("foodAdded");
+      }
+    }
   }
   void drawScore() {
     pushStyle();
@@ -43,13 +71,13 @@ class Manager {
         result=true;
       }
     }
-    for (Food currentFood : foods) {
-      float dist=dist(snake.points.get(0).x, snake.points.get(0).y, currentFood.location.x, currentFood.location.y);
-      if (dist<=currentFood.radius/2) {
-        currentFood.location.x=random(currentFood.radius/2, width-currentFood.radius/2);
-        currentFood.location.y=random(currentFood.radius/2+50, height-currentFood.radius/2);
+    for (int i=foods.size()-1; i>=0; i--) {
+      float dist=dist(snake.points.get(0).x, snake.points.get(0).y, foods.get(i).location.x, foods.get(i).location.y);
+      if (dist<=foods.get(i).radius/2) {
+        foods.remove(foods.get(i));
         score+=2;
         snake.incrementLength(score*2.5);
+        println("FoodRemove");
       }
     }
     return result;

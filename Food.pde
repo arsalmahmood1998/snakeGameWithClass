@@ -1,6 +1,6 @@
 class Food {
   PVector location;
-  float radius=30;
+  float radius=20;
   color foodColor=color(random(255), random(255), random(255));
   Food() {
     location=new PVector();
