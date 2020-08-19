@@ -97,4 +97,12 @@ class Manager {
       addFood();
     }
   }
+  void gameOver() {
+  pushStyle();
+  fill(255, 0, 0);
+  textSize(75);
+  textAlign(CENTER, CENTER);
+  text("Game Over..! ", width/2, height/2);
+  popStyle();
+} 
 }
