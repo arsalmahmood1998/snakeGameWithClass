@@ -1,6 +1,6 @@
 class Food {
   PVector location;
-  float radius=20;
+  float radius=10;
   color foodColor=color(random(255), random(255), random(255));
   Food() {
     location=new PVector();
@@ -12,7 +12,7 @@ class Food {
     fill(foodColor);
     stroke(red(0), green(0), blue(0), 100);
     strokeWeight(3);
-    circle(location.x, location.y, radius);
+    circle(location.x, location.y, radius*2);
     popStyle();
   }
 }

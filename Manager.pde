@@ -32,25 +32,37 @@ class Manager {
     //  Food newfood=new Food();
     //  foods.add(newfood);
     //} 
-    foodsCount=(int)random(1, 10);
+    foodsCount=100;
     println(foodsCount);
     foods.add(new Food());
     for (int i=0; i<foodsCount-1; i++) {
       println("size"+foods.size());
       println("i="+i);
       Food newFood=new Food();
-      boolean result=false;
-      for (int j=0; j<foods.size(); j++) {
+      boolean addFood=true;
+      int j=0;
+      while ( j<foods.size() &&  addFood==true) {
         println("j="+j);
         Food existingFood=new Food();
-        if (dist(newFood.location.x, newFood.location.y, existingFood.location.x, existingFood.location.y)>newFood.radius) {
-          result=true;
+        if (dist(newFood.location.x, newFood.location.y, existingFood.location.x, existingFood.location.y)>newFood.radius*2) {
+          addFood=true;
+        } 
+        else {
+          addFood=false;
         }
-        else{
-          result=false;
-        }
+        j++;
       }
-      if (result) {
+      //for(j=0;j<foods.size();j++){
+      //   println("j="+j);
+      //  Food existingFood=new Food();
+      //  if (dist(newFood.location.x, newFood.location.y, existingFood.location.x, existingFood.location.y)>newFood.radius/2) {
+      //    addFood=true;
+      //  }
+      //  else {
+      //    addFood=false;
+      //  } 
+      //}
+      if (addFood) {
         foods.add(newFood);
         println("foodAdded");
       }
@@ -77,8 +89,10 @@ class Manager {
         foods.remove(foods.get(i));
         score+=2;
         snake.incrementLength(score*2.5);
-        println("FoodRemove");
       }
+    }
+    if(foods.size()==0){
+      addFood();
     }
     return result;
   }
