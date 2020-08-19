@@ -81,4 +81,5 @@ class Snake {
       points.add(newPoint);
     }
   }
+  
 }

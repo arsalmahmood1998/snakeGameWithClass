@@ -9,7 +9,7 @@ void keyPressed() {
     } 
     else if (keyCode == LEFT) {
       newDirection.x-=1;
-    }
+    } 
     else if (keyCode == RIGHT) {
       newDirection.x+=1;
     }

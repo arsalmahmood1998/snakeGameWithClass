@@ -15,8 +15,9 @@ class Manager {
       currentFood.drawFood();
     }
   }
-  void moveGame() {
+  void updateGame() {
     snake.move();
+    ateFoodAndUpdateScore();
   }
   void updateSnakeDirection(PVector newDirection) {
     snake.updateDirection(newDirection);
@@ -28,43 +29,34 @@ class Manager {
     addFood();
   }
   void addFood() {
-    // for (int i=0; i<foodsCount; i++) {
-    //  Food newfood=new Food();
-    //  foods.add(newfood);
-    //} 
     foodsCount=100;
-    println(foodsCount);
     foods.add(new Food());
     for (int i=0; i<foodsCount-1; i++) {
-      println("size"+foods.size());
-      println("i="+i);
       Food newFood=new Food();
       boolean addFood=true;
       int j=0;
       while ( j<foods.size() &&  addFood==true) {
-        println("j="+j);
-        Food existingFood=new Food();
+        Food existingFood=foods.get(j);
         if (dist(newFood.location.x, newFood.location.y, existingFood.location.x, existingFood.location.y)>newFood.radius*2) {
           addFood=true;
-        } 
-        else {
+        } else {
           addFood=false;
         }
         j++;
       }
-      //for(j=0;j<foods.size();j++){
-      //   println("j="+j);
-      //  Food existingFood=new Food();
-      //  if (dist(newFood.location.x, newFood.location.y, existingFood.location.x, existingFood.location.y)>newFood.radius/2) {
-      //    addFood=true;
-      //  }
-      //  else {
-      //    addFood=false;
-      //  } 
-      //}
+      int k=0;
+      while (k<snake.points.size() && addFood==true) {
+        if (dist(newFood.location.x, newFood.location.y, snake.points.get(k).x, snake.points.get(k).y)>newFood.radius*2) {
+          addFood=true;
+        } else {
+          addFood=false;
+        }
+        k++;
+      }
       if (addFood) {
         foods.add(newFood);
-        println("foodAdded");
+      } else {
+        i--;
       }
     }
   }
@@ -75,7 +67,7 @@ class Manager {
     text("Score="+score, 20, 50);
     popStyle();
   }
-  boolean hitTest() {
+  boolean didGameOver() {
     boolean result=false;
     for (int i=1; i<snake.points.size(); i++) {
       if (snake.points.get(0).x==snake.points.get(i).x && snake.points.get(0).y==snake.points.get(i).y) {
@@ -83,17 +75,23 @@ class Manager {
         result=true;
       }
     }
+    if (foods.size()==0) {
+      addFood();
+    }
+    return result;
+  }
+  void ateFoodAndUpdateScore() {
     for (int i=foods.size()-1; i>=0; i--) {
       float dist=dist(snake.points.get(0).x, snake.points.get(0).y, foods.get(i).location.x, foods.get(i).location.y);
-      if (dist<=foods.get(i).radius/2) {
+      if (dist<=foods.get(i).radius) {
         foods.remove(foods.get(i));
         score+=2;
         snake.incrementLength(score*2.5);
       }
     }
-    if(foods.size()==0){
-      addFood();
-    }
-    return result;
   }
+  boolean gameOver=didGameOver();
+    if (gameOver) {
+      gameOver();
+    }
 }

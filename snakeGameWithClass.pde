@@ -6,9 +6,5 @@ void setup() {
 void draw() {
   background(0, 255, 255);
   gameManager.displayGame();
-  gameManager.moveGame();
-  boolean gameOver=gameManager.hitTest();
-  if (gameOver) {
-    gameOver();
-  }
+  gameManager.updateGame();
 }
