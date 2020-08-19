@@ -17,7 +17,11 @@ class Manager {
   }
   void updateGame() {
     snake.move();
-    ateFoodAndUpdateScore();
+    ateFood();
+    boolean gameOver=gameManager.didGameOver();
+    if (gameOver) {
+      gameOver();
+    }
   }
   void updateSnakeDirection(PVector newDirection) {
     snake.updateDirection(newDirection);
@@ -29,7 +33,7 @@ class Manager {
     addFood();
   }
   void addFood() {
-    foodsCount=100;
+    foodsCount=4;
     foods.add(new Food());
     for (int i=0; i<foodsCount-1; i++) {
       Food newFood=new Food();
@@ -39,7 +43,8 @@ class Manager {
         Food existingFood=foods.get(j);
         if (dist(newFood.location.x, newFood.location.y, existingFood.location.x, existingFood.location.y)>newFood.radius*2) {
           addFood=true;
-        } else {
+        } 
+        else {
           addFood=false;
         }
         j++;
@@ -48,14 +53,16 @@ class Manager {
       while (k<snake.points.size() && addFood==true) {
         if (dist(newFood.location.x, newFood.location.y, snake.points.get(k).x, snake.points.get(k).y)>newFood.radius*2) {
           addFood=true;
-        } else {
+        } 
+        else {
           addFood=false;
         }
         k++;
       }
       if (addFood) {
         foods.add(newFood);
-      } else {
+      } 
+      else {
         i--;
       }
     }
@@ -75,12 +82,9 @@ class Manager {
         result=true;
       }
     }
-    if (foods.size()==0) {
-      addFood();
-    }
     return result;
   }
-  void ateFoodAndUpdateScore() {
+  void ateFood() {
     for (int i=foods.size()-1; i>=0; i--) {
       float dist=dist(snake.points.get(0).x, snake.points.get(0).y, foods.get(i).location.x, foods.get(i).location.y);
       if (dist<=foods.get(i).radius) {
@@ -89,9 +93,8 @@ class Manager {
         snake.incrementLength(score*2.5);
       }
     }
-  }
-  boolean gameOver=didGameOver();
-    if (gameOver) {
-      gameOver();
+    if (foods.size()==0) {
+      addFood();
     }
+  }
 }
