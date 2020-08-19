@@ -43,7 +43,8 @@ class Manager {
         Food existingFood=foods.get(j);
         if (dist(newFood.location.x, newFood.location.y, existingFood.location.x, existingFood.location.y)>newFood.radius*2) {
           addFood=true;
-        } else {
+        } 
+        else {
           addFood=false;
         }
         j++;
@@ -52,14 +53,16 @@ class Manager {
       while (k<snake.points.size() && addFood==true) {
         if (dist(newFood.location.x, newFood.location.y, snake.points.get(k).x, snake.points.get(k).y)>newFood.radius*2) {
           addFood=true;
-        } else {
+        } 
+        else {
           addFood=false;
         }
         k++;
       }
       if (addFood) {
         foods.add(newFood);
-      } else {
+      } 
+      else {
         i--;
       }
     }
