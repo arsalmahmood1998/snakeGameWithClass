@@ -43,8 +43,7 @@ class Manager {
         Food existingFood=foods.get(j);
         if (dist(newFood.location.x, newFood.location.y, existingFood.location.x, existingFood.location.y)>newFood.radius*2) {
           addFood=true;
-        } 
-        else {
+        } else {
           addFood=false;
         }
         j++;
@@ -53,16 +52,14 @@ class Manager {
       while (k<snake.points.size() && addFood==true) {
         if (dist(newFood.location.x, newFood.location.y, snake.points.get(k).x, snake.points.get(k).y)>newFood.radius*2) {
           addFood=true;
-        } 
-        else {
+        } else {
           addFood=false;
         }
         k++;
       }
       if (addFood) {
         foods.add(newFood);
-      } 
-      else {
+      } else {
         i--;
       }
     }
@@ -98,11 +95,11 @@ class Manager {
     }
   }
   void gameOver() {
-  pushStyle();
-  fill(255, 0, 0);
-  textSize(75);
-  textAlign(CENTER, CENTER);
-  text("Game Over..! ", width/2, height/2);
-  popStyle();
-} 
+    pushStyle();
+    fill(255, 0, 0);
+    textSize(75);
+    textAlign(CENTER, CENTER);
+    text("Game Over..! ", width/2, height/2);
+    popStyle();
+  }
 }
