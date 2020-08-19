@@ -50,7 +50,7 @@ class Manager {
           result=false;
         }
       }
-      if (result==true) {
+      if (result) {
         foods.add(newFood);
         println("foodAdded");
       }
